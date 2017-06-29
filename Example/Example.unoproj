@@ -1,0 +1,15 @@
+{
+  "Packages": [
+    "Fuse",
+    "FuseJS",
+  ],
+  "Projects": [
+    "../src/Conekta.unoproj",
+  ],
+  "Conekta": {
+    "PublicKey": "zbp4axNG4xVUMcDzTLNz"
+  },
+  "Includes": [
+    "*",
+  ]
+ }

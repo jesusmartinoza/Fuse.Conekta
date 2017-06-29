@@ -1,0 +1,19 @@
+<App>
+    <JavaScript>
+    var Conekta = require("Conekta");
+    var jsonCard = {
+        name : "Jesús Martínez",
+        numberText : "444252454",
+        cvc : "255",
+        month : "07",
+        year : "17"
+    }
+
+    Conekta.createToken(jsonCard)
+    .then(function(response) {
+        console.log(JSON.stringify(response));
+    }).catch(function(e) {
+        console.log("Something happened!\n" + e);
+    });
+    </JavaScript>
+</App>
