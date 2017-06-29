@@ -7,9 +7,10 @@
     "../src/Conekta.unoproj",
   ],
   "Conekta": {
-    "PublicKey": "zbp4axNG4xVUMcDzTLNz"
+    "PublicKey": "zbp4axNG4xVUMcDzTLNz",
+    "ApiVersion" : "0.3.0"
   },
   "Includes": [
     "*",
   ]
- }
+}

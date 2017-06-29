@@ -19,19 +19,14 @@ namespace Fuse.Conekta
 
 			Core.Init();
 
-			AddMember(new NativePromise<Scripting.Object, Scripting.Object>("createToken", TokenFromCard, TokenToJS));
+			AddMember(new NativePromise<string, string>("createToken", TokenFromCard));
 		}
 
-		Future<Scripting.Object> TokenFromCard(object[] args)
+		Future<string> TokenFromCard(object[] args)
 		{
 			var card = (Scripting.Object)args[0];
 
 			return new ConektaToken(card);
-		}
-
-		static Scripting.Object TokenToJS(Context c, Scripting.Object token)
-		{
-			return token;
 		}
 	}
 }

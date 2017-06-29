@@ -5,10 +5,7 @@ namespace Fuse.Conekta
     extern(!MOBILE || iOS)
     public class Core
     {
-        static public void Init()
-        {
-            debug_log "Conekta Fuse just available for Android";
-        }
+        static public void Init() { }
     }
 
     [Require("Gradle.Dependency.Compile", "io.conekta:conektasdk:2.1")]
@@ -24,7 +21,8 @@ namespace Fuse.Conekta
         static public void Init()
         @{
             Conekta.setPublicKey(@{Core._publicKey:Get()});
-            Conekta.setApiVersion(@{Core._apiVersion:Get()});
+			if(!(@{Core._apiVersion:Get()}).isEmpty())
+            	Conekta.setApiVersion(@{Core._apiVersion:Get()});
             Conekta.collectDevice(Activity.getRootActivity());
         @}
     }

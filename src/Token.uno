@@ -5,66 +5,79 @@ using Fuse.Scripting;
 
 namespace Fuse.Conekta
 {
-    extern(!MOBILE || iOS) class ConektaToken : Promise<Scripting.Object>
+	extern(!MOBILE || iOS) class ConektaToken : Promise<string>
 	{
-        public ConektaToken(Scripting.Object card)
-        {
-            Reject("Couldn't create token");
-        }
+		public ConektaToken(Scripting.Object card)
+		{
+			Reject(new Exception("Couldn't create token. Platform not supported"));
+		}
 	}
 
 	[ForeignInclude(Language.Java,
-					"io.conekta.conektasdk.Conekta",
-					"io.conekta.conektasdk.Token",
-					"io.conekta.conektasdk.Card",
-					"org.json.JSONObject",
-                    "com.fuse.Activity")]
-    extern(Android) class ConektaToken : Promise<Scripting.Object>
-    {
+								"io.conekta.conektasdk.Conekta",
+								"io.conekta.conektasdk.Token",
+								"io.conekta.conektasdk.Card",
+								"org.json.JSONObject",
+								"com.fuse.Activity",
+								"android.util.Log")]
+	extern(Android) class ConektaToken : Promise<string>
+	{
 		public string id = "conekta_token";
 
 		public Scripting.Object card;
 
-        public ConektaToken(Scripting.Object card)
-        {
-            this.card = card;
-            CreateToken(card["name"] as string, card["number"] as string, card["cvc"] as string, card["month"] as string, card["year"] as string);
-        }
+		public ConektaToken(Scripting.Object card)
+		{
+			this.card = card;
+			if(card["name"] == null)
+				Reject(new Exception("'name' not found in JSON"));
+			if(card["number"] == null)
+				Reject(new Exception("'number' not found in JSON"));
+			if(card["cvc"] == null)
+				Reject(new Exception("'cvc' not found in JSON"));
+			if(card["month"] == null)
+				Reject(new Exception("'month' not found in JSON"));
+			if(card["year"] == null)
+				Reject(new Exception("'year' not found in JSON"));
 
-        [Foreign(Language.Java)]
-        public static extern(Android) void CreateToken(String name, String number, String cvc, String month, String year)
-        @{
-            Token token = new Token(Activity.getRootActivity());
-            Card card = new Card(name, number, cvc, month, year);
 
-            //Listen when token is returned
-            token.onCreateTokenListener(new Token.CreateToken() {
-                @Override
-                public void onCreateTokenReady(JSONObject data) {
-                    String uuid = Conekta.deviceFingerPrint(Activity.getRootActivity());
-                    try {
-                        String id = data.getString("id");
-                        @{ConektaToken:Of(_this).Resolve(string):Call(id)};
-                    } catch (Exception err) {
-                        @{ConektaToken:Of(_this).Reject(string):Call(err.toString())};
-                    }
-                }
-            });
+			CreateToken(card["name"] as string, card["number"] as string, card["cvc"] as string, card["month"] as string, card["year"] as string);
+		}
 
-            //Request for create token
-            token.create(card);
-        @}
+		[Foreign(Language.Java)]
+		public extern(Android) void CreateToken(String name, String number, String cvc, String month, String year)
+		@{
+			Token token = new Token(Activity.getRootActivity());
+			Card card = new Card(name, number, cvc, month, year);
+
+			//Listen when token is returned
+			token.onCreateTokenListener(new Token.CreateToken() {
+				@Override
+				public void onCreateTokenReady(JSONObject data) {
+					String uuid = Conekta.deviceFingerPrint(Activity.getRootActivity());
+					try {
+						if(data.getString("object").equals("error"))
+							@{ConektaToken:Of(_this).Reject(string):Call(data.getString("message"))};
+						else
+							@{ConektaToken:Of(_this).Resolve(string):Call(data.getString("id"))};
+					} catch (Exception err) {
+						@{ConektaToken:Of(_this).Reject(string):Call(err.toString())};
+					}
+				}
+			});
+
+			//Request for create token
+			token.create(card);
+		@}
 
 		void Resolve(string token)
 		{
-            var obj = new object() as Scripting.Object;
-            obj["token"] = token;
-			Resolve(obj);
+			Resolve(token);
 		}
 
 		void Reject(string reason)
 		{
 			Reject(new Exception(reason));
 		}
-    }
+	}
 }
