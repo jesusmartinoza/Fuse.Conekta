@@ -1,0 +1,55 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "name": "Moonlight",
+      "director": "Jonathan Rickfar", 
+      "description": "Está basada en la obra teatral semi-autobiográfica In Moonlight Black Boys Look Blue escrita por Tarell Alvin McCraney.",
+      "tags": "Drama | Detective",
+      "image": "https://images-na.ssl-images-amazon.com/images/M/MV5BNzQxNTIyODAxMV5BMl5BanBnXkFtZTgwNzQyMDA3OTE@._V1_UX182_CR0,0,182,268_AL_.jpg",
+    },
+    {
+      "id": 2,
+      "name": "Spider-Man: De Regreso a Casa",
+      "director": "Jon Watts", 
+      "description": "mocionado después de su experiencia con Los Vengadores, Peter regresa a casa, donde vive con su Tía May",
+      "tags": "Acción | Aventura",
+      "image": "http://gnula.nu/wp-content/uploads/2017/03/Spider_Man_Homecoming_nuevo_poster_usa.jpg",
+    },
+    {
+      "id": 3,
+      "name": "Churchill",
+      "director": "Jonathan Teplitzky", 
+      "description": "Winston Churchill, siendo el Primer Ministro de Gran Bretaña, tuvo que tomar una decisión de suma importancia 48 horas antes de la batalla conocida como el Día D",
+      "tags": "Drama",
+      "image": "https://upload.wikimedia.org/wikipedia/en/6/6d/Churchill_%28film%29.png",
+    },
+    {
+      "id": 4,
+      "name": "Mujer Maravilla",
+      "director": "Patty Jenkins", 
+      "description": "Antes de ser Wonder Woman era Diana, princesa de las Amazonas entrenada para ser una guerrera invencible.",
+      "tags": "Acción",
+      "image": "hhttp://static.cinepol.is/img/peliculas/22816/1/1/22816.jpg",
+    },
+    {
+      "id": 5,
+      "name": "La Momia",
+      "director": "Alex Kurtzman", 
+      "description": "Olvidada y enterrada dentro de una cripta en medio del desierto, una antigua reina, a quien su destino le fue arrebatado injustamente.",
+      "tags": "Acción | Aventura",
+      "image": "https://images-na.ssl-images-amazon.com/images/M/MV5BNzQxNTIyODAxMV5BMl5BanBnXkFtZTgwNzQyMDA3OTE@._V1_UX182_CR0,0,182,268_AL_.jpg",
+    },
+    {
+      "id": 6,
+      "name": "Las Hijas de Abril",
+      "director": "Michel Franco", 
+      "description": "Valeria tiene 17 años y está embarazada. Vive en Puerto Vallarta con Clara, su media hermana",
+      "tags": "Drama",
+      "image": "http://static.cinepol.is/img/peliculas/23639/1/1/23639.jpg",
+    }
+  ],
+  "code": 200,
+  "message": "Ok"
+}
