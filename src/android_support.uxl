@@ -1,0 +1,5 @@
+<Package>
+    <Extensions Backend="CPlusPlus" Condition="Android">
+        <ProcessFile Name="AndroidManifest.xml" TargetName="app/src/main/AndroidManifest.xml" />
+    </Extensions>
+</Package>

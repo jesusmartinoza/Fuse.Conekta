@@ -3,7 +3,7 @@ using Uno.UX;
 using Uno.Threading;
 using Fuse.Scripting;
 
-namespace Fuse.Conekta
+namespace Fuse.ConektaWrapper
 {
 	/**
 	*/

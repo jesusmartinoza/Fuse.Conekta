@@ -4,6 +4,15 @@
     "FuseJS",
   ],
   "Includes": [
-    "*.uno"
+    "*.uno",
+    "Conekta-iOS/Card.h:ObjCHeader:iOS",
+    "Conekta-iOS/Conekta.h:ObjCHeader:iOS",
+    "Conekta-iOS/Connection.h:ObjCHeader:iOS",
+    "Conekta-iOS/Token.h:ObjCHeader:iOS",
+    "Conekta-iOS/Card.m:ObjCSource:iOS",
+    "Conekta-iOS/Conekta.m:ObjCSource:iOS",
+    "Conekta-iOS/Connection.m:ObjCSource:iOS",
+    "Conekta-iOS/Token.m:ObjCSource:iOS",
+    "android_support.uxl"
   ]
 }

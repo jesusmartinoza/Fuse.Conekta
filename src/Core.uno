@@ -1,11 +1,32 @@
 using Uno.Compiler.ExportTargetInterop;
 
-namespace Fuse.Conekta
+namespace Fuse.ConektaWrapper
 {
-    extern(!MOBILE || iOS)
+    extern(!MOBILE)
     public class Core
     {
         static public void Init() { }
+    }
+
+	[extern(iOS) Require("Source.Include", "Conekta.h")]
+    extern(iOS)
+    public class Core
+    {
+		internal static string _publicKey = extern<string>"uString::Ansi(\"@(Project.Conekta.PublicKey:Or(''))\")";
+		extern(iOS) internal static ObjC.Object _conekta;
+
+        [Foreign(Language.ObjC)]
+        static public void Init()
+        @{
+			Conekta *conekta = [[Conekta alloc] init];
+			UIViewController *controller = [UIApplication sharedApplication].keyWindow.rootViewController;
+
+			[conekta setDelegate: controller];
+			[conekta setPublicKey:@{Core._publicKey:Get()}];
+			[conekta collectDevice];
+
+			@{_conekta:Set(conekta)};
+        @}
     }
 
     [Require("Gradle.Dependency.Compile", "io.conekta:conektasdk:2.1")]
