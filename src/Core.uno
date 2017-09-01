@@ -8,24 +8,24 @@ namespace Fuse.ConektaWrapper
         static public void Init() { }
     }
 
-	[extern(iOS) Require("Source.Include", "Conekta.h")]
+    [extern(iOS) Require("Source.Include", "Conekta.h")]
     extern(iOS)
     public class Core
     {
-		internal static string _publicKey = extern<string>"uString::Ansi(\"@(Project.Conekta.PublicKey:Or(''))\")";
-		extern(iOS) internal static ObjC.Object _conekta;
+	internal static string _publicKey = extern<string>"uString::Ansi(\"@(Project.Conekta.PublicKey:Or(''))\")";
+	extern(iOS) internal static ObjC.Object _conekta;
 
         [Foreign(Language.ObjC)]
         static public void Init()
         @{
-			Conekta *conekta = [[Conekta alloc] init];
-			UIViewController *controller = [UIApplication sharedApplication].keyWindow.rootViewController;
+		Conekta *conekta = [[Conekta alloc] init];
+		UIViewController *controller = [UIApplication sharedApplication].keyWindow.rootViewController;
 
-			[conekta setDelegate: controller];
-			[conekta setPublicKey:@{Core._publicKey:Get()}];
-			[conekta collectDevice];
+		[conekta setDelegate: controller];
+		[conekta setPublicKey:@{Core._publicKey:Get()}];
+		[conekta collectDevice];
 
-			@{_conekta:Set(conekta)};
+		@{_conekta:Set(conekta)};
         @}
     }
 
